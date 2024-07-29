@@ -40,7 +40,7 @@ fi
 #crontab -e
 
 #2. agregar al archivo lo siguiente:
-#*/5 * * * * actividad2.sh
+#*/5 * * * * ruta_absoluta/actividad2.sh
 
 #cada asterisco significa una unidad de tiempo:
 #*/5 -> 5 minutos
