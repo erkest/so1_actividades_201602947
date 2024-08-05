@@ -130,3 +130,68 @@ chmod u+x directorio1/archivo2.txt
 ```bash
 chgrp grupo1 directorio1/archivo2.txt
 ```
+
+## 6. Configurar permisos de directorio:
+### Comandos:
+```bash
+chmod 750 directorio1/
+```
+
+## 7. Comprobación de acceso:
+### Comandos:
+```bash
+#salir del usuario1
+exit
+
+#acceder como usuario2
+sudo su - usuario2
+
+#leer archivo 1 y archivo 2
+cd usuario1/
+cat archivo1.txt
+cat directorio1/archivo2.txt
+```
+
+### Resultado:
+> cat: archivo1.txt: Permission denied \
+> cat: directorio1/archivo2.txt: Permission denied
+
+## 8. Verificación final:
+### Comandos:
+```bash
+#salir del usuario2 y regresar al usuario1 (tambien se puede verificar con superuser)
+exit
+sudo su - usuario1
+
+#navegar al directorio principal de usuario1
+cd home/usuario1/
+#ver permisos de archivo1 y directorio1
+ls -l
+ls -ld
+
+#ver permisos de archivo2
+cd directorio1/
+ls -l
+ls -ld
+```
+
+### Resultado:
+archivo 1 y directorio1
+> \$ ls -l \
+total 8\
+-rw-r----- 1 usuario1 usuario1   35 Aug  4 23:31 archivo1.txt \
+drwxr-x--- 2 usuario1 usuario1 4096 Aug  4 23:36 directorio1 \
+$ ls -ld \
+drwxr-xr-x 4 usuario1 usuario1 4096 Aug  4 23:33 .
+
+archivo 2
+> \$ ls -l \
+total 0 \
+-rwxrw-r-- 1 usuario1 grupo1 0 Aug  4 23:36 archivo2.txt
+
+# Reflexión
+¿Por qué es importante gestionar correctamente los usuarios y permisos en un sistema operativo?
+
+*Para llevar un mejor control sobre archivos importantes que sólo debería de ver el propietario o cierto grupo en específico.*
+
+*También para agregar una capa de seguridad extra y evitar que se ejecute algún programa sin autorización o algún usuario modifique o elimine archivos de manera intencional o accidental.*
